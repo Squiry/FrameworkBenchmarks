@@ -1,0 +1,17 @@
+apply plugin: 'application'
+
+dependencies {
+    annotationProcessor platform('ru.tinkoff.kora:kora-parent:0.10.0-SNAPSHOT')
+    annotationProcessor 'ru.tinkoff.kora:annotation-processors'
+    implementation project(':common')
+    implementation project(':jte:jte-common')
+    annotationProcessor project(':jte:jte-annotation-processor')
+    implementation 'ru.tinkoff.kora:http-server-undertow'
+    implementation 'ru.tinkoff.kora:database-vertx'
+    implementation 'ru.tinkoff.kora:json-module'
+    implementation 'ru.tinkoff.kora:logging-logback'
+}
+
+application {
+    mainClass = 'ru.tinkoff.kora.techempower.async.no.bs.Application'
+}

@@ -1,0 +1,35 @@
+plugins {
+    id("application")
+    id('org.jetbrains.kotlin.jvm') version "1.7.21"
+    id("com.google.devtools.ksp") version "1.7.21-1.0.8"
+}
+
+kotlin {
+    targetCompatibility = JavaVersion.VERSION_19
+    sourceSets.main {
+        kotlin.srcDir("build/generated/ksp/main/kotlin")
+    }
+    sourceSets.test {
+        kotlin.srcDir("build/generated/ksp/test/kotlin")
+    }
+}
+
+dependencies {
+    implementation platform('ru.tinkoff.kora:kora-parent:0.10.0-SNAPSHOT')
+    implementation 'ru.tinkoff.kora:common'
+    implementation project(':common')
+    implementation project(':jte:jte-common')
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-jdk8'
+    implementation 'ru.tinkoff.kora:http-server-undertow'
+    implementation 'ru.tinkoff.kora:database-vertx'
+    implementation 'ru.tinkoff.kora:json-module'
+    implementation 'ru.tinkoff.kora:logging-logback'
+
+    ksp platform('ru.tinkoff.kora:kora-parent:0.10.0-SNAPSHOT')
+    ksp 'ru.tinkoff.kora:symbol-processors'
+
+}
+
+application {
+    mainClass = 'ru.tinkoff.kora.techempower.kotlin.ApplicationKt'
+}

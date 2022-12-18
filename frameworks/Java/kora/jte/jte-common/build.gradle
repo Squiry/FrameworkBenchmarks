@@ -1,0 +1,6 @@
+apply plugin: 'java-library'
+
+dependencies {
+    api 'ru.tinkoff.kora:http-server-common'
+    api 'gg.jte:jte:2.2.4'
+}

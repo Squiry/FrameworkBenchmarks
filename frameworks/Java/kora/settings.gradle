@@ -1,0 +1,12 @@
+rootProject.name = 'kora'
+
+
+include(
+    'jte:jte-annotation-processor',
+    'jte:jte-common',
+    'common',
+    'kora-blocking',
+    'kora-async',
+    'kora-async-no-bs',
+    'kora-kotlin',
+)

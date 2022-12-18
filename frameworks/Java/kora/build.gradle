@@ -1,0 +1,26 @@
+subprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    if (!name.contains("kotlin")) {
+        apply plugin: 'java'
+
+        java {
+            toolchain {
+                languageVersion.set(JavaLanguageVersion.of(19))
+            }
+        }
+
+        tasks.withType(JavaCompile) {
+            options.debug = true
+            options.encoding = 'UTF-8'
+            options.compilerArgs << '-parameters' << '-Xlint:all' << '-Xlint:-serial' << '-XprintRounds' << '--enable-preview'
+        }
+
+        dependencies {
+            implementation platform('ru.tinkoff.kora:kora-parent:0.10.0-SNAPSHOT')
+        }
+    }
+}

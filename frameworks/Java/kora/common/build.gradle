@@ -1,0 +1,27 @@
+import gg.jte.ContentType
+
+import java.nio.file.Paths
+
+plugins {
+    id 'gg.jte.gradle' version '2.2.4'
+    id 'java-library'
+}
+
+jte {
+    generate()
+    binaryStaticContent = true
+    contentType = ContentType.Html
+}
+
+tasks.generateJte {
+    sourceDirectory = Paths.get(projectDir.absolutePath, "src", "main", "jte")
+    targetDirectory = Paths.get(projectDir.absolutePath, "build", "jte-classes")
+    sourceSets.main.java.srcDirs += "build/jte-classes"
+    contentType = gg.jte.ContentType.Html
+}
+
+
+dependencies {
+    api 'gg.jte:jte:2.2.4'
+    implementation 'ru.tinkoff.kora:json-module'
+}

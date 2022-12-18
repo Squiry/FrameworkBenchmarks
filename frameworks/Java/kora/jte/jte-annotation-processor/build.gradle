@@ -1,0 +1,4 @@
+dependencies {
+    implementation 'ru.tinkoff.kora:kora-app-annotation-processor'
+    implementation 'com.squareup:javapoet:1.13.0'
+}
