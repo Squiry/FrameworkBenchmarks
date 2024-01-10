@@ -1,5 +1,6 @@
 package ru.tinkoff.kora.techempower.loom.nima.nima;
 
+import io.helidon.http.HeaderNames;
 import io.helidon.webserver.http.Handler;
 import io.helidon.webserver.http.ServerRequest;
 import io.helidon.webserver.http.ServerResponse;
@@ -22,10 +23,15 @@ public final class NimaHandler implements Handler {
         for (var header : httpRs.headers()) {
             res.header(header.getKey(), header.getValue().toArray(new String[0]));
         }
+        res.header(HeaderNames.SERVER, "kora-nima");
 
         try (var content = httpRs.body()) {
             if (content == null) {
                 return;
+            }
+            var contentType = content.contentType();
+            if (contentType != null) {
+                res.header(HeaderNames.CONTENT_TYPE, contentType);
             }
             var full = content.getFullContentIfAvailable();
             if (full == null) {

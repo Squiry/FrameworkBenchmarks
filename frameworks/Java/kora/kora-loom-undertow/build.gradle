@@ -15,6 +15,6 @@ dependencies {
 }
 
 application {
-    mainClass = 'ru.tinkoff.kora.techempower.loom.nima.Application'
+    mainClass = 'ru.tinkoff.kora.techempower.loom.undertow.Application'
     applicationName = 'app'
 }
