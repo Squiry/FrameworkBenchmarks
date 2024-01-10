@@ -24,4 +24,6 @@ tasks.generateJte {
 dependencies {
     api 'gg.jte:jte:2.2.4'
     implementation 'ru.tinkoff.kora:json-module'
+
+    annotationProcessor 'ru.tinkoff.kora:annotation-processors'
 }

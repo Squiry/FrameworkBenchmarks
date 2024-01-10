@@ -4,6 +4,7 @@ import com.squareup.javapoet.*;
 import ru.tinkoff.kora.annotation.processor.common.AbstractKoraProcessor;
 import ru.tinkoff.kora.annotation.processor.common.AnnotationUtils;
 import ru.tinkoff.kora.annotation.processor.common.CommonUtils;
+import ru.tinkoff.kora.annotation.processor.common.NameUtils;
 
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.*;
@@ -34,7 +35,7 @@ public class JteAnnotationProcessor extends AbstractKoraProcessor {
                     .map(VariableElement::getSimpleName)
                     .map(Objects::toString)
                     .orElse("Html");
-                var writerClassName = CommonUtils.getOuterClassesAsPrefix(typeElement) + typeElement.getSimpleName().toString() + "_JteWriter";
+                var writerClassName = NameUtils.generatedType(typeElement, "JteWriter");
                 var typeName = TypeName.get(typeElement.asType());
                 var b = TypeSpec.classBuilder(writerClassName)
                     .addModifiers(Modifier.PUBLIC, Modifier.FINAL)

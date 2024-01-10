@@ -1,4 +1,4 @@
-package ru.tinkoff.kora.techempower.blocking;
+package ru.tinkoff.kora.techempower.loom.nima;
 
 import jakarta.annotation.Nullable;
 import ru.tinkoff.kora.http.common.annotation.HttpRoute;

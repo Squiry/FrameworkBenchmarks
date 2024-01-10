@@ -6,7 +6,8 @@ include(
     'jte:jte-common',
     'common',
     'kora-blocking',
+    'kora-loom-undertow',
+    'kora-loom-nima',
     'kora-async',
-    'kora-async-no-bs',
     'kora-kotlin',
 )

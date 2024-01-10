@@ -1,18 +1,21 @@
 package ru.tinkoff.kora.techempower.kotlin
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.future.await
 import kotlinx.coroutines.future.future
-import ru.tinkoff.kora.common.Context
 import ru.tinkoff.kora.database.vertx.VertxRepository
-import ru.tinkoff.kora.http.common.HttpBody
 import ru.tinkoff.kora.http.common.annotation.HttpRoute
 import ru.tinkoff.kora.http.common.annotation.Query
+import ru.tinkoff.kora.http.common.body.HttpBody
 import ru.tinkoff.kora.http.server.common.HttpServerResponse
 import ru.tinkoff.kora.http.server.common.annotation.HttpController
 import ru.tinkoff.kora.json.common.annotation.Json
 import ru.tinkoff.kora.jte.common.Jte
-import ru.tinkoff.kora.techempower.common.World.*
+import ru.tinkoff.kora.techempower.common.World.parseQueryCount
+import ru.tinkoff.kora.techempower.common.World.randomWorldNumber
 import java.nio.ByteBuffer
 import java.nio.charset.StandardCharsets
 import kotlin.coroutines.coroutineContext
@@ -78,10 +81,9 @@ class TechempowerController(private val repository: TechempowerRepository) {
     private suspend fun <T> VertxRepository.withConnection(callback: suspend CoroutineScope.() -> T): T {
         val repository = this
         val scope = CoroutineScope(coroutineContext + Dispatchers.Unconfined)
-        val future = repository.vertxConnectionFactory.withConnectionCompletionStage {
+        val future = repository.vertxConnectionFactory.withConnection {
             scope.future { callback(scope) }
         }
         return future.await()
     }
-
 }

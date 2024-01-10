@@ -1,7 +1,10 @@
 package ru.tinkoff.kora.techempower.common;
 
+import ru.tinkoff.kora.json.common.annotation.Json;
+
 import java.util.concurrent.ThreadLocalRandom;
 
+@Json
 public record World(int id, int randomNumber) {
     public static int randomWorldNumber(int previousRead) {
         var random = randomWorldNumber();

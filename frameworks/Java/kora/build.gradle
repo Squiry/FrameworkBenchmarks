@@ -1,7 +1,6 @@
 subprojects {
     repositories {
         mavenCentral()
-        mavenLocal()
     }
 
     if (!name.contains("kotlin")) {
@@ -9,7 +8,7 @@ subprojects {
 
         java {
             toolchain {
-                languageVersion.set(JavaLanguageVersion.of(19))
+                languageVersion.set(JavaLanguageVersion.of(21))
             }
         }
 
@@ -20,7 +19,8 @@ subprojects {
         }
 
         dependencies {
-            implementation platform('ru.tinkoff.kora:kora-parent:0.10.0-SNAPSHOT')
+            implementation platform('ru.tinkoff.kora:kora-parent:1.0.1')
+            annotationProcessor platform('ru.tinkoff.kora:kora-parent:1.0.1')
         }
     }
 }
