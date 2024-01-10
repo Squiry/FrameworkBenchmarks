@@ -16,4 +16,5 @@ dependencies {
 
 application {
     mainClass = 'ru.tinkoff.kora.techempower.blocking.Application'
+    applicationName = 'app'
 }

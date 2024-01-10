@@ -15,4 +15,5 @@ dependencies {
 
 application {
     mainClass = 'ru.tinkoff.kora.techempower.async.no.bs.Application'
+    applicationName = 'app'
 }

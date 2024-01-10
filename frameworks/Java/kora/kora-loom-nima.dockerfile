@@ -1,7 +1,17 @@
-FROM eclipse-temurin:21
+FROM eclipse-temurin:21 as build
 WORKDIR /app
-COPY kora-blocking/build/distributions/kora-loom-nima.tar kora-loom-nima.tar
-RUN tar -xvf kora-loom-nima.tar
+COPY gradle gradle
+COPY build.gradle settings.gradle gradlew ./
+COPY jte jte
+COPY common common
+COPY kora-loom-nima kora-loom-nima
+RUN ls -la .
+RUN ./gradlew clean :kora-loom-nima:distTar
+
+FROM eclipse-temurin:21
+WORKDIR /
+COPY --from=build /app/kora-loom-nima/build/distributions/app.tar app.tar
+RUN tar -xvf app.tar
 ENV JAVA_OPTS "-XX:+UseNUMA"
 EXPOSE 8080
-CMD ["/app/kora-loom-nima/bin/kora-loom-nima"]
+CMD ["/app/bin/app"]

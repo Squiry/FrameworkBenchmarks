@@ -1,7 +1,17 @@
-FROM eclipse-temurin:21
+FROM eclipse-temurin:21 as build
 WORKDIR /app
-COPY kora-blocking/build/distributions/kora-async.tar kora-async.tar
-RUN tar -xvf kora-async.tar
+COPY gradle gradle
+COPY build.gradle settings.gradle gradlew ./
+COPY jte jte
+COPY common common
+COPY kora-async kora-async
+RUN ls -la .
+RUN ./gradlew clean :kora-async:distTar
+
+FROM eclipse-temurin:21
+WORKDIR /
+COPY --from=build /app/kora-async/build/distributions/app.tar app.tar
+RUN tar -xvf app.tar
 ENV JAVA_OPTS "-XX:+UseNUMA"
 EXPOSE 8080
-CMD ["/app/kora-async/bin/kora-async"]
+CMD ["/app/bin/app"]

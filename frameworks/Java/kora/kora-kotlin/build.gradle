@@ -34,4 +34,5 @@ dependencies {
 
 application {
     mainClass = 'ru.tinkoff.kora.techempower.kotlin.ApplicationKt'
+    applicationName = 'app'
 }
