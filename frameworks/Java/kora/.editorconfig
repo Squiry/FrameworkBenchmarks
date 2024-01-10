@@ -17,7 +17,7 @@ ij_java_keep_simple_classes_in_one_line = true
 ij_java_keep_simple_lambdas_in_one_line = true
 ij_java_keep_simple_methods_in_one_line = true
 
-[{*.yml,*.yaml}]
+[{*.yml,*.yaml,*.conf}]
 indent_size = 2
 tab_width = 2
 ij_continuation_indent_size = 2

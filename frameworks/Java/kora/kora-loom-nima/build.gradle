@@ -8,7 +8,7 @@ dependencies {
     annotationProcessor project(':jte:jte-annotation-processor')
     implementation 'ru.tinkoff.kora:database-jdbc'
     implementation 'ru.tinkoff.kora:json-module'
-    implementation 'org.postgresql:postgresql:42.5.1'
+    implementation 'org.postgresql:postgresql:42.7.1'
     implementation 'ru.tinkoff.kora:logging-logback'
     implementation 'ru.tinkoff.kora:config-hocon'
     implementation 'ru.tinkoff.kora:http-server-common'
@@ -17,6 +17,6 @@ dependencies {
 }
 
 application {
-    mainClass = 'ru.tinkoff.kora.techempower.blocking.Application'
+    mainClass = 'ru.tinkoff.kora.techempower.loom.nima.Application'
     applicationName = 'app'
 }

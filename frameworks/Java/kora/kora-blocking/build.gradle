@@ -9,7 +9,7 @@ dependencies {
     implementation 'ru.tinkoff.kora:http-server-undertow'
     implementation 'ru.tinkoff.kora:database-jdbc'
     implementation 'ru.tinkoff.kora:json-module'
-    implementation 'org.postgresql:postgresql:42.5.1'
+    implementation 'org.postgresql:postgresql:42.7.1'
     implementation 'ru.tinkoff.kora:logging-logback'
     implementation 'ru.tinkoff.kora:config-hocon'
 }
