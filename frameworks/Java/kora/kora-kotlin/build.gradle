@@ -27,6 +27,7 @@ dependencies {
     implementation 'ru.tinkoff.kora:json-module'
     implementation 'ru.tinkoff.kora:logging-logback'
     implementation 'ru.tinkoff.kora:config-hocon'
+    implementation 'io.vertx:vertx-pg-client:4.3.8'
 
     ksp platform('ru.tinkoff.kora:kora-parent:1.0.1')
     ksp 'ru.tinkoff.kora:symbol-processors'

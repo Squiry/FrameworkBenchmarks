@@ -11,6 +11,7 @@ dependencies {
     implementation 'ru.tinkoff.kora:json-module'
     implementation 'ru.tinkoff.kora:logging-logback'
     implementation 'ru.tinkoff.kora:config-hocon'
+    implementation 'io.vertx:vertx-pg-client:4.3.8'
 }
 
 application {
