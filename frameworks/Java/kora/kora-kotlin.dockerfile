@@ -12,6 +12,6 @@ FROM eclipse-temurin:21
 WORKDIR /
 COPY --from=build /app/kora-kotlin/build/distributions/app.tar app.tar
 RUN tar -xvf app.tar
-ENV JAVA_OPTS "-XX:+UseNUMA"
+ENV JAVA_OPTS "-XX:+UseNUMA --enable-preview"
 EXPOSE 8080
 CMD ["/app/bin/app"]
