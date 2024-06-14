@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21 as build
+FROM eclipse-temurin:22 as build
 WORKDIR /app
 COPY gradle gradle
 COPY build.gradle settings.gradle gradlew ./
@@ -8,7 +8,7 @@ COPY kora-kotlin kora-kotlin
 RUN ls -la .
 RUN ./gradlew clean :kora-kotlin:distTar
 
-FROM eclipse-temurin:21
+FROM eclipse-temurin:22
 WORKDIR /
 COPY --from=build /app/kora-kotlin/build/distributions/app.tar app.tar
 RUN tar -xvf app.tar
