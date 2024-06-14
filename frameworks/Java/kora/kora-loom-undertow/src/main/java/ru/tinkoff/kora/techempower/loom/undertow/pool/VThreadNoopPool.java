@@ -28,7 +28,7 @@ public final class VThreadNoopPool implements ByteBufferPool {
         if (buf == null) {
             buf = this.allocateBuf();
         }
-        return new Pooled(this, buf);
+        return new Pooled(this, buf.clear());
     }
 
     private ByteBuffer allocateBuf() {

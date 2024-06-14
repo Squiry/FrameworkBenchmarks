@@ -31,7 +31,7 @@ public final class CarrierThreadLocalPool implements ByteBufferPool {
                 ? ByteBuffer.allocateDirect(size)
                 : ByteBuffer.allocate(size);
         }
-        return new Pooled(this, buf);
+        return new Pooled(this, buf.clear());
     }
 
     @Override
