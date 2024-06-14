@@ -21,7 +21,7 @@ public final class ThreadLocalPool implements ByteBufferPool {
     public PooledByteBuffer allocate() {
         var deque = tl.get();
         var buf = deque.pollLast();
-        if (buf != null) {
+        if (buf == null) {
             buf = direct
                 ? ByteBuffer.allocateDirect(size)
                 : ByteBuffer.allocate(size);

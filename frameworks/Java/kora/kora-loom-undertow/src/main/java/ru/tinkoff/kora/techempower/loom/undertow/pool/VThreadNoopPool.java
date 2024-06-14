@@ -25,7 +25,7 @@ public final class VThreadNoopPool implements ByteBufferPool {
         }
         var deque = tl.get();
         var buf = deque.pollLast();
-        if (buf != null) {
+        if (buf == null) {
             buf = this.allocateBuf();
         }
         return new Pooled(this, buf);
