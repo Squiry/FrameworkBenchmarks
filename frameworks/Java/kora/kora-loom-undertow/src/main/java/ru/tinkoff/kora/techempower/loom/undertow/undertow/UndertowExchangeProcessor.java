@@ -254,65 +254,70 @@ public class UndertowExchangeProcessor implements Runnable {
     }
 
     private void sendException(PublicApiResponse response, Throwable error) {
-        if (!(error instanceof HttpServerResponse rs)) {
-            exchange.setStatusCode(500);
-            exchange.getResponseSender().send(Objects.requireNonNullElse(error.getMessage(), "Unknown error"), StandardCharsets.UTF_8, new IoCallback() {
-                @Override
-                public void onComplete(HttpServerExchange exchange, Sender sender) {
-                    response.closeSendResponseSuccess(500, null, error);
-                    IoCallback.END_EXCHANGE.onComplete(exchange, sender);
-                }
-
-                @Override
-                public void onException(HttpServerExchange exchange, Sender sender, IOException exception) {
-                    error.addSuppressed(exception);
-                    response.closeConnectionError(500, error);
-                    IoCallback.END_EXCHANGE.onException(exchange, sender, exception);
-                }
-            });
-            return;
-        }
-        exchange.setStatusCode(rs.code());
-        var body = rs.body();
-        if (body == null) {
-            this.setHeaders(exchange.getRequestHeaders(), rs.headers(), null);
-            exchange.addExchangeCompleteListener((exchange, nextListener) -> {
-                response.closeSendResponseSuccess(exchange.getStatusCode(), rs.headers(), error);
-                nextListener.proceed();
-            });
-            exchange.setResponseContentLength(0);
-            exchange.endExchange();
-            return;
-        } else {
-            this.setHeaders(exchange.getResponseHeaders(), rs.headers(), null);
-        }
-
-        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
-        var full = body.getFullContentIfAvailable();
-        if (full != null) {
-            sendFullBody(response, rs, full, error);
-            return;
-        }
-
-        if (this.isInBlockingThread()) {
-            try (var os = exchange.startBlocking().getOutputStream()) {
-                body.write(os);
-                return;
-            } catch (IOException e) {
-                if (!exchange.isResponseStarted()) {
-                    exchange.setStatusCode(500);
-                } else {
-                    try {
-                        exchange.getConnection().close();
-                    } catch (IOException ex) {
-                        e.addSuppressed(ex);
+        try {
+            if (!(error instanceof HttpServerResponse rs)) {
+                exchange.setStatusCode(500);
+                exchange.getResponseSender().send(Objects.requireNonNullElse(error.getMessage(), "Unknown error"), StandardCharsets.UTF_8, new IoCallback() {
+                    @Override
+                    public void onComplete(HttpServerExchange exchange, Sender sender) {
+                        response.closeSendResponseSuccess(500, null, error);
+                        IoCallback.END_EXCHANGE.onComplete(exchange, sender);
                     }
-                }
-                response.closeBodyError(exchange.getStatusCode(), e);
+
+                    @Override
+                    public void onException(HttpServerExchange exchange, Sender sender, IOException exception) {
+                        error.addSuppressed(exception);
+                        response.closeConnectionError(500, error);
+                        IoCallback.END_EXCHANGE.onException(exchange, sender, exception);
+                    }
+                });
                 return;
             }
+            exchange.setStatusCode(rs.code());
+            var body = rs.body();
+            if (body == null) {
+                this.setHeaders(exchange.getRequestHeaders(), rs.headers(), null);
+                exchange.addExchangeCompleteListener((exchange, nextListener) -> {
+                    response.closeSendResponseSuccess(exchange.getStatusCode(), rs.headers(), error);
+                    nextListener.proceed();
+                });
+                exchange.setResponseContentLength(0);
+                exchange.endExchange();
+                return;
+            } else {
+                this.setHeaders(exchange.getResponseHeaders(), rs.headers(), null);
+            }
+
+            exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
+            var full = body.getFullContentIfAvailable();
+            if (full != null) {
+                sendFullBody(response, rs, full, error);
+                return;
+            }
+
+            if (this.isInBlockingThread()) {
+                try (var os = exchange.startBlocking().getOutputStream()) {
+                    body.write(os);
+                    return;
+                } catch (IOException e) {
+                    if (!exchange.isResponseStarted()) {
+                        exchange.setStatusCode(500);
+                    } else {
+                        try {
+                            exchange.getConnection().close();
+                        } catch (IOException ex) {
+                            e.addSuppressed(ex);
+                        }
+                    }
+                    response.closeBodyError(exchange.getStatusCode(), e);
+                    return;
+                }
+            }
+            sendStreamingBody(response, HttpHeaders.empty(), body, error);
+        } catch (Throwable t) {
+            t.addSuppressed(error);
+            throw t;
         }
-        sendStreamingBody(response, HttpHeaders.empty(), body, error);
     }
 
     private boolean isInBlockingThread() {
