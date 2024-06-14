@@ -31,7 +31,7 @@ public class NimaRequestBody implements HttpBodyInput {
     }
 
     @Override
-    public int contentLength() {
+    public long contentLength() {
         return (int) req.headers().contentLength().orElse(-1L);
     }
 

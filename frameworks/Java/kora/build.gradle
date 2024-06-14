@@ -12,15 +12,15 @@ subprojects {
             }
         }
 
-        tasks.withType(JavaCompile) {
+        tasks.withType(JavaCompile).configureEach {
             options.debug = true
             options.encoding = 'UTF-8'
             options.compilerArgs << '-parameters' << '-Xlint:all' << '-Xlint:-serial' << '-XprintRounds' << '--enable-preview'
         }
 
         dependencies {
-            implementation platform('ru.tinkoff.kora:kora-parent:1.0.1')
-            annotationProcessor platform('ru.tinkoff.kora:kora-parent:1.0.1')
+            implementation platform("ru.tinkoff.kora:kora-parent:$koraVersion")
+            annotationProcessor platform("ru.tinkoff.kora:kora-parent:$koraVersion")
         }
     }
 }

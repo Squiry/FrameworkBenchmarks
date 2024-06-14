@@ -1,7 +1,7 @@
 apply plugin: 'application'
 
 dependencies {
-    annotationProcessor platform('ru.tinkoff.kora:kora-parent:0.10.0-SNAPSHOT')
+    annotationProcessor platform("ru.tinkoff.kora:kora-parent:$koraVersion")
     annotationProcessor 'ru.tinkoff.kora:annotation-processors'
     implementation project(':common')
     implementation project(':jte:jte-common')
@@ -17,4 +17,8 @@ dependencies {
 application {
     mainClass = 'ru.tinkoff.kora.techempower.loom.undertow.Application'
     applicationName = 'app'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << '--add-exports' << 'java.base/jdk.internal.misc=ALL-UNNAMED'
 }

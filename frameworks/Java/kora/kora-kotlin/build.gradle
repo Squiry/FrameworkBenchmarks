@@ -17,7 +17,7 @@ kotlin {
 
 
 dependencies {
-    implementation platform('ru.tinkoff.kora:kora-parent:1.0.1')
+    implementation platform("ru.tinkoff.kora:kora-parent:$koraVersion")
     implementation 'ru.tinkoff.kora:common'
     implementation project(':common')
     implementation project(':jte:jte-common')
@@ -29,7 +29,7 @@ dependencies {
     implementation 'ru.tinkoff.kora:config-hocon'
     implementation 'io.vertx:vertx-pg-client:4.3.8'
 
-    ksp platform('ru.tinkoff.kora:kora-parent:1.0.1')
+    ksp platform("ru.tinkoff.kora:kora-parent:$koraVersion")
     ksp 'ru.tinkoff.kora:symbol-processors'
 }
 

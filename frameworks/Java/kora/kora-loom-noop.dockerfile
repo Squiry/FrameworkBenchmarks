@@ -13,5 +13,6 @@ WORKDIR /
 COPY --from=build /app/kora-loom-undertow/build/distributions/app.tar app.tar
 RUN tar -xvf app.tar
 ENV JAVA_OPTS "-XX:+UseNUMA --enable-preview"
+ENV POOL_MODE "NOOP"
 EXPOSE 8080
 CMD ["/app/bin/app"]
