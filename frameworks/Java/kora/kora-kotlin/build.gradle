@@ -1,17 +1,13 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("application")
-    id('org.jetbrains.kotlin.jvm') version "1.9.22"
-    id("com.google.devtools.ksp") version "1.9.22-1.0.16"
+    id('org.jetbrains.kotlin.jvm') version "1.9.23"
+    id("com.google.devtools.ksp") version "1.9.23-1.0.20"
 }
 
 kotlin {
-    targetCompatibility = JavaVersion.VERSION_22
-    sourceSets.main {
-        kotlin.srcDir("build/generated/ksp/main/kotlin")
-    }
-    sourceSets.test {
-        kotlin.srcDir("build/generated/ksp/test/kotlin")
-    }
+    targetCompatibility = JavaVersion.VERSION_21
     jvmToolchain(21)
 }
 

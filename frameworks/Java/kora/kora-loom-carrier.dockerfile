@@ -1,7 +1,7 @@
 FROM eclipse-temurin:22 as build
 WORKDIR /app
 COPY gradle gradle
-COPY build.gradle settings.gradle gradlew ./
+COPY build.gradle settings.gradle gradle.properties gradlew ./
 COPY jte jte
 COPY common common
 COPY kora-loom-undertow kora-loom-undertow

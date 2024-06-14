@@ -8,13 +8,13 @@ import ru.tinkoff.kora.config.common.annotation.ConfigSource;
 import ru.tinkoff.kora.config.hocon.HoconConfigModule;
 import ru.tinkoff.kora.database.jdbc.JdbcDatabaseModule;
 import ru.tinkoff.kora.http.server.common.handler.BlockingRequestExecutor;
-import ru.tinkoff.kora.http.server.undertow.UndertowHttpServerModule;
 import ru.tinkoff.kora.json.module.JsonModule;
 import ru.tinkoff.kora.jte.common.JteModule;
 import ru.tinkoff.kora.logging.logback.LogbackModule;
 import ru.tinkoff.kora.techempower.loom.undertow.pool.CarrierThreadLocalPool;
 import ru.tinkoff.kora.techempower.loom.undertow.pool.ThreadLocalPool;
 import ru.tinkoff.kora.techempower.loom.undertow.pool.VThreadNoopPool;
+import ru.tinkoff.kora.techempower.loom.undertow.undertow.UndertowHttpServerModule;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionStage;

@@ -9,5 +9,4 @@ include(
     'kora-loom-undertow',
     'kora-loom-nima',
     'kora-async',
-    'kora-kotlin',
 )

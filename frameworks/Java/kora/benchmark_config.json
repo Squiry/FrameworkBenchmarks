@@ -116,29 +116,6 @@
                 "display_name": "kora-loom-carrier",
                 "notes": "",
                 "versus": "undertow"
-            },
-            "kotlin": {
-                "json_url": "/json",
-                "db_url": "/db",
-                "query_url": "/queries?queries=",
-                "fortune_url": "/fortunes",
-                "plaintext_url": "/plaintext",
-                "update_url": "/updates?queries=",
-                "port": 8080,
-                "approach": "Realistic",
-                "classification": "Fullstack",
-                "database": "Postgres",
-                "framework": "kora",
-                "language": "Kotlin",
-                "flavor": "None",
-                "orm": "Micro",
-                "platform": "Undertow",
-                "webserver": "Undertow",
-                "os": "Linux",
-                "database_os": "Linux",
-                "display_name": "kora-kotlin",
-                "notes": "",
-                "versus": "undertow"
             }
         }
     ]
