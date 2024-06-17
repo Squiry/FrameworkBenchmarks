@@ -5,6 +5,7 @@ include(
     'jte:jte-annotation-processor',
     'jte:jte-common',
     'common',
+    'agent',
     'kora-blocking',
     'kora-loom-undertow',
     'kora-loom-nima',

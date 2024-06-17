@@ -10,12 +10,7 @@ public final class CarrierThreadLocalPool implements ByteBufferPool {
     private final boolean direct;
     private final ByteBufferPool arrayBackedPool;
     private final int size = 1024 * 16 - 20;
-    private final ThreadLocal<ArrayDeque<ByteBuffer>> tl = new jdk.internal.misc.CarrierThreadLocal() {
-        @Override
-        protected Object initialValue() {
-            return new ArrayDeque<>(16);
-        }
-    };
+    private final ThreadLocal<ArrayDeque<ByteBuffer>> tl = CarrierThreadLocalFix.withInitial(() -> new ArrayDeque<>(16));
 
     public CarrierThreadLocalPool(boolean direct) {
         this.direct = direct;

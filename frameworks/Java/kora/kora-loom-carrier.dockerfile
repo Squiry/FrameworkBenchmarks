@@ -12,7 +12,7 @@ FROM eclipse-temurin:22
 WORKDIR /
 COPY --from=build /app/kora-loom-undertow/build/distributions/app.tar app.tar
 RUN tar -xvf app.tar
-ENV JAVA_OPTS "-XX:+UseNUMA --enable-preview --add-exports java.base/jdk.internal.misc=ALL-UNNAMED"
+ENV JAVA_OPTS "-XX:+UseNUMA --enable-preview --add-exports java.base/jdk.internal.misc=ALL-UNNAMED -javaagent:/opt/application/lib/loom-agent.jar"
 ENV POOL_MODE "CARRIER"
 EXPOSE 8080
 CMD ["/app/bin/app"]

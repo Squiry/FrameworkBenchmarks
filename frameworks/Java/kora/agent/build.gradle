@@ -1,0 +1,13 @@
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << '--enable-preview' << '--add-exports' << 'java.base/jdk.internal.misc=ALL-UNNAMED'
+}
+
+jar {
+    archiveFileName.set("loom-agent.jar")
+    manifest {
+        attributes(
+            "PreMain-Class": "ru.t.kora.techempower.loom.agent.Agent"
+        )
+    }
+}

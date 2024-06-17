@@ -12,6 +12,7 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.7.1'
     implementation 'ru.tinkoff.kora:logging-logback'
     implementation 'ru.tinkoff.kora:config-hocon'
+    runtimeOnly project(":agent")
 }
 
 application {
