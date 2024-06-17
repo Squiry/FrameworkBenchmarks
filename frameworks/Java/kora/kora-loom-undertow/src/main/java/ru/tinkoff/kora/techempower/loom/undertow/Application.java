@@ -24,6 +24,8 @@ import java.util.function.Consumer;
 public interface Application extends UndertowHttpServerModule, JdbcDatabaseModule, HoconConfigModule, JsonModule, JteModule, LogbackModule {
     static void main(String[] args) {
         KoraApplication.run(ApplicationGraph::graph);
+        JsonModule.JSON_FACTORY._getBufferRecycler();
+        JsonModule.JSON_FACTORY._getRecyclerPool();
     }
 
     default BlockingRequestExecutor loomblockingRequestExecutor() {

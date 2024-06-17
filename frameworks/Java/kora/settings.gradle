@@ -8,6 +8,4 @@ include(
     'agent',
     'kora-blocking',
     'kora-loom-undertow',
-    'kora-loom-nima',
-    'kora-async',
 )
